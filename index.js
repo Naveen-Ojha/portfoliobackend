@@ -9,7 +9,7 @@ const app = express();
 let server = require('http').Server(app);
 
 let corsOptions = {
-  origin: "http://localhost:3000"
+  origin: ["http://localhost:3000", "https://portfoliobackend-duyx.onrender.com"]
 };
 
 app.use(cors(corsOptions));
