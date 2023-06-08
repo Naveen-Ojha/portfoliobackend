@@ -16,7 +16,7 @@ exports.addBlog = async (req, res) => {
       category: req.body.category,
       author: req.body.author,
       images: req.file
-        ? `http://localhost:8080/upload/blog/${req.file.filename}`
+        ? `https://portfoliobackend-duyx.onrender.com/upload/blog/${req.file.filename}`
         : "",
     });
 
@@ -161,7 +161,7 @@ exports.UpdateBlog = async (req, res) => {
           category: req.body.category,
           author: req.body.author,
           images: req.file
-            ? `http://localhost:8080/upload/blog/${req.file.filename}`
+            ? `https://portfoliobackend-duyx.onrender.com/upload/blog/${req.file.filename}`
             : req.body.images,
         },
       },
