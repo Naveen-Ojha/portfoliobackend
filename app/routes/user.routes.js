@@ -2,6 +2,16 @@ const multer = require("multer");
 const path = require("path");
 const blogController = require("../controllers/blog.controller");
 const blogCategoryController = require("../controllers/blogCategory.controller");
+const homeCategoryController = require("../controllers/homecategory.controller");
+const aboutController = require("../controllers/about.controller");
+const contactController = require("../controllers/contact.controller");
+const experienceController = require("../controllers/experience.controller");
+const profileController = require("../controllers/profile.controller");
+const projectsController = require("../controllers/projects.controller");
+const serviceController = require("../controllers/service.controller");
+const testimonialsController = require("../controllers/testimonials.controller");
+const skillsController = require("../controllers/skills.controller");
+const { verifySignUp } = require("../middlewares");
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -69,4 +79,46 @@ module.exports = function (app) {
     blogCategoryController.UpdateBlogCategory
   );
   app.get("/api/blog/category/:id", blogCategoryController.getBlogCategoryById);
+
+  // Home Category Api
+
+  app.post(
+    "/api/category",
+    [verifySignUp.checkDuplicateHomeCategory],
+    homeCategoryController.addHomeCategory
+  );
+
+  app.get("/api/category", homeCategoryController.getHomeCategory);
+
+  // About Api
+  app.post("/api/about", aboutController.addAbout);
+  app.get("/api/about", aboutController.getAbout);
+
+  // Contact Api
+  app.post("/api/contact", contactController.addContact);
+  app.get("/api/contact", contactController.getContact);
+
+  // Experience Api
+  app.post("/api/experience", experienceController.addExperience);
+  app.get("/api/experience", experienceController.getExperience);
+
+  // Skills Api
+  app.post("/api/skills", skillsController.addSkills);
+  app.get("/api/skills", skillsController.getSkills);
+
+  // Profile Api
+  app.post("/api/profile", profileController.addProfile);
+  app.get("/api/profile", profileController.getProfile);
+
+  // Projects Api
+  app.post("/api/projects", projectsController.addProject);
+  app.get("/api/projects", projectsController.getProject);
+
+  // Service Api
+  app.post("/api/service", serviceController.addService);
+  app.get("/api/service", serviceController.getService);
+
+  // Testimonials Api
+  app.post("/api/testimonials", testimonialsController.addTestimonial);
+  app.get("/api/testimonials", testimonialsController.getTestimonial);
 };
