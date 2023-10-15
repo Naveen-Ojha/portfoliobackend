@@ -9,11 +9,7 @@ const app = express();
 let server = require("http").Server(app);
 
 let corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "https://portfoliobackend-duyx.onrender.com",
-    "https://naveenojha.netlify.app",
-  ],
+  origin: ["http://localhost:4200"],
 };
 
 app.use(cors(corsOptions));
@@ -51,6 +47,19 @@ app.get("/", (req, res) => {
 // routes
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
+
+app.use(function (req, res) {
+  // Invalid request
+  res.json({
+    data: {
+      name: "Error",
+      status: 404,
+      message: "Invalid Request",
+      statusCode: 404,
+      stack: `${process.env.PORT}`,
+    },
+  });
+});
 
 app.use(function (req, res, next) {
   res.status(404).send({

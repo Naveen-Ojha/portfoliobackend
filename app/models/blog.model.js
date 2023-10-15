@@ -21,14 +21,16 @@ const Blog = mongoose.model("Blog",
         },
         images: {
             type: String,
-            required: true
+            required: true,
+            default:"https://www.digitalvidya.com/blog/wp-content/uploads/2019/03/personal-blog-1024x538.jpg"
         },
         category: {
             type: String,
             required: true
         },
         author: {
-            type: String
+            type: String,
+            default:"Naveen Ojha"
         }
     }, { timestamps: true })
 )

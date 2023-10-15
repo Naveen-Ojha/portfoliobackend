@@ -1,3 +1,4 @@
+const { verifySignUp } = require("../middlewares");
 const adminController = require("../controllers/adminauth.controller");
 
 module.exports = function (app) {
@@ -10,7 +11,14 @@ module.exports = function (app) {
   });
   // Admin Auth Routes
 
-  app.post("/api/auth/admin/signup", adminController.addAdminUser);
+  app.post(
+    "/api/auth/admin/signup",
+    [
+      verifySignUp.checkDuplicateUsernameOrEmail,
+      verifySignUp.checkRolesExisted,
+    ],
+    adminController.addAdminUser
+  );
 
   app.post("/api/auth/admin/signin", adminController.AdminSignin);
 

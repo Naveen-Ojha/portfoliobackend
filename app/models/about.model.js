@@ -44,6 +44,10 @@ const About = mongoose.model(
       type: Number,
       default: 8250,
     },
+    status: {
+      type: Boolean,
+      default: true,
+    },
   })
 );
 

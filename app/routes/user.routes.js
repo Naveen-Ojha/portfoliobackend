@@ -67,7 +67,8 @@ module.exports = function (app) {
     uploadBlog.single("images"),
     blogController.UpdateBlog
   );
-  app.get("/api/blog/id/:id", blogController.getBlogById);
+  app.get("/api/blog/:id", blogController.getBlogById);
+  app.delete("/api/blog/:id", blogController.deleteBlog);
   app.get("/api/blog/search", blogController.getBlogSearch);
 
   // Blog Category Api
@@ -87,12 +88,16 @@ module.exports = function (app) {
     [verifySignUp.checkDuplicateHomeCategory],
     homeCategoryController.addHomeCategory
   );
-
   app.get("/api/category", homeCategoryController.getHomeCategory);
+  app.get("/api/category/:id", homeCategoryController.getByIdHomeCategory);
+  app.put("/api/category/:id", homeCategoryController.updateHomeCategory);
 
   // About Api
   app.post("/api/about", aboutController.addAbout);
   app.get("/api/about", aboutController.getAbout);
+  app.get("/api/about/:id", aboutController.getAboutById);
+  app.delete("/api/about/:id", aboutController.deleteAbout);
+  app.patch("/api/about/:id", aboutController.UpdateAbout);
 
   // Contact Api
   app.post("/api/contact", contactController.addContact);

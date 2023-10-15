@@ -17,7 +17,7 @@ exports.addBlog = async (req, res) => {
       author: req.body.author,
       images: req.file
         ? `https://portfoliobackend-duyx.onrender.com/upload/blog/${req.file.filename}`
-        : "",
+        : req.body.images,
     });
 
     const saveData = await data.save();
@@ -39,7 +39,7 @@ exports.getBlog = async (req, res) => {
       }
     } else {
       const blog = await Blog.find({}).sort({ _id: -1 });
-      res.status(200).json(blog);
+      res.status(200).json({ message: "Data Fetch Successfully!", data: blog });
     }
   } catch (err) {
     res.status(500).json(err);
@@ -207,3 +207,15 @@ exports.getBlogSearch = (req, res) => {
       });
     });
 };
+
+exports.deleteBlog = async (req, res) => {
+  try {
+      const id = req.params.id
+
+      const deleteData = await Blog.deleteOne({ _id: id })
+
+      res.status(200).send({ message: "Data Deleted Successfully!" })
+  } catch (error) {
+      res.status(500).send({ message: error.message })
+  }
+}
